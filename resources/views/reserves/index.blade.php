@@ -21,13 +21,15 @@
 								</thead>
 								<tbody>
 								 	@foreach($reserves as $reserve)
-										<tr>
-											<td scope="col"> {{$reserve->getLesson->name}} </td>
-											<td scope="col"> {{explode(" ",$reserve->reserve_date)[0]}} </td>
-											<td scope="col"> {{explode(" ",$reserve->reserve_date)[1]}} </td>
-											<td scope="col"> {{$reserve->quantity}} </td>
-											<td scope="col"> <a href="#" class="button btn float-right" style="background-color: #033e82; color: white;"> Continuar </a> </td>
-										</tr>
+								 		@if($reserve->user_id == Auth()->user()->id)
+											<tr>
+												<td scope="col"> {{$reserve->getLesson->name}} </td>
+												<td scope="col"> {{explode(" ",$reserve->reserve_date)[0]}} </td>
+												<td scope="col"> {{explode(" ",$reserve->reserve_date)[1]}} </td>
+												<td scope="col"> {{$reserve->quantity}} </td>
+												<td scope="col"> <a href="#" class="button btn float-right" style="background-color: #033e82; color: white;"> Continuar </a> </td>
+											</tr>
+										@endif
 									@endforeach
 								</tbody>
 							</table>

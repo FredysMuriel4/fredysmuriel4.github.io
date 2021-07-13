@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::resource('reserva', "App\Http\Controllers\ReserveController");
+Route::resource('reserva', "App\Http\Controllers\ReserveController")->middleware('auth');
+
+Auth::routes(['register' => false]);
+
+Route::get('/home', [App\Http\Controllers\ReserveController::class, 'index'])->name('home');

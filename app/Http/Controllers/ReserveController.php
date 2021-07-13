@@ -28,7 +28,7 @@ class ReserveController extends Controller
             $reserve = new Reserve();
 
             $reserve = [
-                'user_id' => 1,
+                'user_id' => Auth()->user()->id,
                 'lesson_id' => $request->lesson_id,
                 'reserve_date' => $request->date." ".$request->time,
                 'quantity' => $request->quantity
