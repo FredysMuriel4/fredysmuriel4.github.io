@@ -10,9 +10,12 @@ class ReserveController extends Controller
 {
     public function index()
     {
+        $actual_time = time();
+        $actual_time = date("H:i:s", $actual_time);
+        $actual_day = date('Y-m-d');
         $lessons = Lesson::get();
-        $reserves = Reserve::get();
-        return view('reserves.index', compact('lessons', 'reserves'));
+        $reserves = Reserve::where('user_id', Auth()->user()->id)->get();
+        return view('reserves.index', compact('lessons', 'reserves', 'actual_time', 'actual_day'));
     }
 
     public function store(Request $request)
@@ -20,18 +23,22 @@ class ReserveController extends Controller
         try {
             $request->validate([
                 'lesson_id' => 'required',
-                'date' => 'required|after:today',
+                'date' => 'required|after:yesterday',
                 'time' => 'required',
                 'quantity' => 'required'
             ]);
 
             $reserve = new Reserve();
 
+            $end_reserve_hour = strtotime ( '+'.$request->quantity.' hour' , strtotime ($request->time) ) ;
+            $end_reserve_hour = date('H:i:s', $end_reserve_hour);
+
             $reserve = [
                 'user_id' => Auth()->user()->id,
                 'lesson_id' => $request->lesson_id,
                 'reserve_date' => $request->date." ".$request->time,
-                'quantity' => $request->quantity
+                'quantity' => $request->quantity,
+                'end_reserve_hour' => $end_reserve_hour
             ];
 
             Reserve::create($reserve);

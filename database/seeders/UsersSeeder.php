@@ -25,5 +25,14 @@ class UsersSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('users')->insert([
+            'name' => 'Estudiante ITSA',
+            'email' => 'estudiante@itsa.edu.co',
+            'email_verified_at' => now(),
+            'password' => bcrypt('secret'),
+            'remember_token' => 'xd',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

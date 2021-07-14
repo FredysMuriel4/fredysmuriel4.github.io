@@ -13,7 +13,8 @@ class Reserve extends Model
         'user_id',
         'lesson_id',
         'reserve_date',
-        'quantity'
+        'quantity',
+        'end_reserve_hour'
     ];
 
     public function getLesson()

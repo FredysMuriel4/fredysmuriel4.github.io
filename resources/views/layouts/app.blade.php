@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Laboratorio de virtualización</title>
+    <link rel="shortcut icon" href="{{asset('images/Logo-Laboratorio-VRSS.png')}}">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

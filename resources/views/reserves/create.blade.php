@@ -33,7 +33,7 @@
             </div>
             <div class="col-md-6">
               <label> <b> Cantidad de horas *</b> </label> <br>
-              <input type="number" name="quantity" class="form-control" value="{{old('quantity')}}">
+              <input type="number" name="quantity" class="form-control" value="{{old('quantity')}}" max="5">
             </div>
           </div>
           <div class="col mt-3">

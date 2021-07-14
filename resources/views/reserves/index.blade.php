@@ -3,7 +3,7 @@
 	<div class="content" style="margin-top: 3%;">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="card center" style="width: 60%; margin-left: 20%;">
+				<div class="card center" style="width: 80%; margin-left:10%;">
 					<div class="card-header mb-2" style="background-color: #033e82; color: white ;">
 						<h4> Reservas </h4>
 						<small> Aquí encontrarás todas tus reservas programadas.</small>
@@ -21,15 +21,25 @@
 								</thead>
 								<tbody>
 								 	@foreach($reserves as $reserve)
-								 		@if($reserve->user_id == Auth()->user()->id)
 											<tr>
-												<td scope="col"> {{$reserve->getLesson->name}} </td>
-												<td scope="col"> {{explode(" ",$reserve->reserve_date)[0]}} </td>
-												<td scope="col"> {{explode(" ",$reserve->reserve_date)[1]}} </td>
-												<td scope="col"> {{$reserve->quantity}} </td>
-												<td scope="col"> <a href="#" class="button btn float-right" style="background-color: #033e82; color: white;"> Continuar </a> </td>
+											<div style="display: none;">
+												{{$reserve_day = explode(" ",$reserve->reserve_date)[0]}}
+											</div>
+											<div style="display: none;">
+												{{$reserve_hour = explode(" ",$reserve->reserve_date)[1]}}
+											</div>
+												<td> {{$reserve->getLesson->name}} </td>
+												<td> {{$reserve_day}} </td>
+												<td> {{$reserve_hour}} </td>
+												<td class="text-center"> {{$reserve->quantity}} </td>
+												
+												{{-- @if(explode(" ",$reserve->reserve_date)[1] >= $actual_time) --}}
+												@if($reserve_day == $actual_day)
+													@if($actual_time >= $reserve_hour && $actual_time <= $reserve->end_reserve_hour)
+														<td> <a href="#" class="button btn float-right" style="background-color: #033e82; color: white;"> Continuar </a> </td>
+													@endif
+												@endif
 											</tr>
-										@endif
 									@endforeach
 								</tbody>
 							</table>

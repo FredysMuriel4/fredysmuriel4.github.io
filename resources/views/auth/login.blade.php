@@ -5,8 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" style="background-color: white;">
-                    <img src="{{asset('images/logo Lab-VRSS.jpg')}}" style="max-width: 100%; height: auto;">
+                <div class="card-header">
+                    <div class="col-md-12 text-center">
+                        <img src="{{asset('images/banner.png')}}" class="img-responsive" style="">
+                    </div>
                 </div>
 
                 <div class="card-body">
