@@ -32,10 +32,9 @@
 												<td> {{$reserve_day}} </td>
 												<td> {{$reserve_hour}} </td>
 												<td class="text-center"> {{$reserve->quantity}} </td>
-												
 												{{-- @if(explode(" ",$reserve->reserve_date)[1] >= $actual_time) --}}
-												@if($reserve_day == $actual_day)
-													@if($actual_time >= $reserve_hour && $actual_time <= $reserve->end_reserve_hour)
+												@if(strtotime($reserve_day) == strtotime($actual_day))
+													@if(strtotime($actual_time) >= strtotime($reserve_hour) && strtotime($actual_time) <= strtotime($reserve->end_reserve_hour))
 														<td> <a href="#" class="button btn float-right" style="background-color: #033e82; color: white;"> Continuar </a> </td>
 													@endif
 												@endif
