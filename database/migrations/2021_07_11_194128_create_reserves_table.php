@@ -17,9 +17,11 @@ class CreateReservesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('lesson_id')->references('id')->on('lessons');
-            $table->datetime('reserve_date');
-            $table->time('end_reserve_hour');
-            $table->integer('quantity');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->integer('state');
             $table->timestamps();
         });
     }

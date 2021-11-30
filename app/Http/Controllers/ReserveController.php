@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\Reserve;
+use Illuminate\Support\Facades\Auth;
 
 class ReserveController extends Controller
 {
@@ -23,32 +24,51 @@ class ReserveController extends Controller
         try {
             $request->validate([
                 'lesson_id' => 'required',
-                'date' => 'required|after:yesterday',
-                'time' => 'required',
-                'quantity' => 'required'
+                'start_date' => 'required|after:yesterday',
+                'end_date' => 'required|after:yesterday',
+                'start_time' => 'required',
+                'end_time' => 'required',
             ]);
 
             $reserve = new Reserve();
+            $reserve->user_id = Auth()->user()->id;
+            $reserve->lesson_id = $request->lesson_id;
+            $reserve->start_date = $request->start_date;
+            $reserve->end_date = $request->end_date;
+            $reserve->start_time = $request->start_time;
+            $reserve->end_time = $request->end_time;
+            $reserve->state = 1;
 
-            $end_reserve_hour = strtotime ( '+'.$request->quantity.' hour' , strtotime ($request->time) ) ;
-            $end_reserve_hour = date('H:i:s', $end_reserve_hour);
+            $reserve->save();
 
-            $reserve = [
-                'user_id' => Auth()->user()->id,
-                'lesson_id' => $request->lesson_id,
-                'reserve_date' => $request->date." ".$request->time,
-                'quantity' => $request->quantity,
-                'end_reserve_hour' => $end_reserve_hour
-            ];
+            // $end_reserve_hour = strtotime ( '+'.$request->quantity.' hour' , strtotime ($request->time) ) ;
+            // $end_reserve_hour = date('H:i:s', $end_reserve_hour);
 
-            Reserve::create($reserve);
+            // $reserve = [
+            //     'user_id' => Auth()->user()->id,
+            //     'lesson_id' => $request->lesson_id,
+            //     'reserve_date' => $request->date." ".$request->time,
+            //     'quantity' => $request->quantity,
+            //     'end_reserve_hour' => $end_reserve_hour
+            // ];
 
             session()->flash('success', 'Actividad reservada exitosamente.');
             return redirect()->route('reserva.index');
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             session()->flash('danger', $e);
             return redirect()->back()->withInput();
         }
+    }
+
+    public function create()
+    {
+        $lessons = Lesson::get();
+        return view('reserves.create', compact('lessons'));
+    }
+
+    public function getReserves($id)
+    {
+        return Reserve::where('lesson_id', $id)->with('getLesson')->get();
     }
 }

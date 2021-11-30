@@ -1,4 +1,4 @@
-@yield('create')
+{{-- @yield('create')
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document" style="width: 150%">
     <div class="modal-content">
@@ -43,4 +43,57 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
+
+@extends('layouts.base')
+@section('content')
+    <div class="content" style="margin-top: 3%;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card center" style="width: 80%; margin-left:10%;">
+                    <div class="card-header mb-2" style="background-color: #033e82; color: white ;">
+                        <h4> Actividades </h4>
+						<small> Selecciona la actividad que quieras reservar.</small>
+                    </div>
+                    @include('layouts.alerts')
+                    <div class="card-body">
+                        @isset($lessons)
+                            <div class="row">
+                                @foreach ($lessons as $lesson)
+                                <div class="col">
+                                    <div class="card" style="height:400px;">
+                                        <div class="card-header mb-2" style="background-color: #033e82; color: white ;">
+                                            {{$lesson->name}}
+                                        </div>
+                                        <div class="card-body">
+                                            {{$lesson->description}}
+                                        </div>
+                                        <div class="card-footer">
+                                            <button type="button" class="btn float-right" style="background-color: #033e82; color: white;" onclick="loadCalendar({{$lesson->id}})"> Reserva </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        @endisset
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @include('reserves.modals.calendar')
+    @include('reserves.modals.newReserve')
+@endsection
+@push('styles')
+    <style>
+        .fc-col-header {
+            width: 400px !important;
+        }
+
+        table.fc-scrollgrid-sync-table {
+            width: 400px !important;
+            height: 300px !important;
+        }
+
+    </style>
+@endpush

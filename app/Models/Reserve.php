@@ -12,9 +12,11 @@ class Reserve extends Model
     protected $fillable = [
         'user_id',
         'lesson_id',
-        'reserve_date',
-        'quantity',
-        'end_reserve_hour'
+        'start_date',
+        'end_date',
+        'start_time',
+        'end_time',
+        'state',
     ];
 
     public function getLesson()

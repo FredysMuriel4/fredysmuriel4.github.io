@@ -14,31 +14,22 @@
 							<table class="table">
 								<thead>
 									<th scope="col"> Actividad </th>
-									<th scope="col"> Fecha </th>
-									<th scope="col"> Hora </th>
-									<th scope="col"> Horas </th>
+									<th scope="col"> Fecha Inicio</th>
+									<th scope="col"> Fecha Fin</th>
+									<th scope="col"> Hora Inicio</th>
+									<th scope="col"> Hora Fin</th>
 									<th scope="col">  </th>
 								</thead>
 								<tbody>
-								 	@foreach($reserves as $reserve)
-											<tr>
-											<div style="display: none;">
-												{{$reserve_day = explode(" ",$reserve->reserve_date)[0]}}
-											</div>
-											<div style="display: none;">
-												{{$reserve_hour = explode(" ",$reserve->reserve_date)[1]}}
-											</div>
-												<td> {{$reserve->getLesson->name}} </td>
-												<td> {{$reserve_day}} </td>
-												<td> {{$reserve_hour}} </td>
-												<td class="text-center"> {{$reserve->quantity}} </td>
-												{{-- @if(explode(" ",$reserve->reserve_date)[1] >= $actual_time) --}}
-												@if(strtotime($reserve_day) == strtotime($actual_day))
-													@if(strtotime($actual_time) >= strtotime($reserve_hour) && strtotime($actual_time) <= strtotime($reserve->end_reserve_hour))
-														<td> <a href="#" class="button btn float-right" style="background-color: #033e82; color: white;"> Continuar </a> </td>
-													@endif
-												@endif
-											</tr>
+                                    @foreach($reserves as $reserve)
+                                        <tr>
+                                            <td>{{$reserve->getLesson->name}}</td>
+                                            <td>{{date('j/M/Y', strtotime($reserve->start_date))}}</td>
+                                            <td>{{date('j/M/Y', strtotime($reserve->end_date))}}</td>
+                                            <td>{{date('g:m A', strtotime($reserve->start_time))}}</td>
+                                            <td>{{date('g:m A', strtotime($reserve->end_time))}}</td>
+                                            <td></td>
+                                        </tr>
 									@endforeach
 								</tbody>
 							</table>
@@ -49,12 +40,13 @@
 						@endif
 					</div>
 					<div class="card-footer">
-						<button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn float-right" style="background-color: #033e82; color: white;"> Nueva Reserva </button>
+						{{-- <button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn float-right" style="background-color: #033e82; color: white;"> Nueva Reserva </button> --}}
+						<a href="{{route('reserva.create')}}"type="button" class="btn float-right" style="background-color: #033e82; color: white;"> Nueva Reserva </a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </button>
-@include('reserves.create')
 @endsection
+

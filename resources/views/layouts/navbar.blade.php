@@ -12,12 +12,22 @@
       </li>
       @auth
       <li class="nav-item">
-        <a class="nav-link" href="#" style="color:white;">Reservar</a>
+        <a class="nav-link" href="{{route('reserva.index')}}" style="color:white;" title="Inicio"><i class="fad fa-home-alt"></i></a>
+      </li>
+      @endauth
+      @auth
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('reserva.create')}}" style="color:white;" title="Reservar"><i class="fad fa-calendar-alt"></i></a>
+      </li>
+      @endauth
+      @auth
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="color:white;" title="Perfil"><i class="fad fa-user-circle"></i></a>
       </li>
       @endauth
       @auth
       <li class="nav-item dropdown">
-        <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color:white;">Salir</a>
+        <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color:white;" title="Salir"><i class="fad fa-sign-out"></i></a>
       </li>
       @endauth
       @guest

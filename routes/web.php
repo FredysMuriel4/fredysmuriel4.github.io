@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::resource('reserva', "App\Http\Controllers\ReserveController")->middleware('auth');
+// Route::resource('reserva', "App\Http\Controllers\ReserveController")->middleware('auth');
+Route::get('reserva', "App\Http\Controllers\ReserveController@index")->name('reserva.index')->middleware('auth');
+Route::get('reserva/create', "App\Http\Controllers\ReserveController@create")->name('reserva.create')->middleware('auth');
+Route::post('reserva/store', "App\Http\Controllers\ReserveController@store")->name('reserva.store')->middleware('auth');
+Route::get('/reserves/{id}', "App\Http\Controllers\ReserveController@getReserves")->middleware('auth');
 
 Auth::routes(['register' => false]);
 

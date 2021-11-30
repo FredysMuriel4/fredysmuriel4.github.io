@@ -17,31 +17,31 @@ class LessonsSeeder extends Seeder
         DB::table('lessons')->delete();
         DB::table('lessons')->insert([
             'name' => 'Virtual trunking Protocol',
-            'description' => '',
+            'description' => 'Descripción laboratorio 1',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('lessons')->insert([
             'name' => 'Switch port Analyzer/ Remote Switch Port Analyzer',
-            'description' => '',
+            'description' => 'Descripción laboratorio 2',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('lessons')->insert([
             'name' => 'First Hop Redundancy Protocols',
-            'description' => '',
+            'description' => 'Descripción laboratorio 3',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('lessons')->insert([
             'name' => 'Dynamic Multipoint Virtual Private Network',
-            'description' => '',
+            'description' => 'Descripción laboratorio 4',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('lessons')->insert([
             'name' => 'Routing Redistribution',
-            'description' => '',
+            'description' => 'Descripción laboratorio 5',
             'created_at' => now(),
             'updated_at' => now()
         ]);
