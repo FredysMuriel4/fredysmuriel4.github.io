@@ -22,7 +22,7 @@
       @endauth
       @auth
       <li class="nav-item">
-        <a class="nav-link" href="#" style="color:white;" title="Perfil"><i class="fad fa-user-circle"></i></a>
+        <a class="nav-link" href="{{route('perfil.index')}}" style="color:white;" title="Perfil"><i class="fad fa-user-circle"></i></a>
       </li>
       @endauth
       @auth

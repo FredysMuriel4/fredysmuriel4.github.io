@@ -27,6 +27,8 @@ Route::get('/reserves/{id}', "App\Http\Controllers\ReserveController@getReserves
 Route::get('registro', "App\Http\Controllers\RegisterController@index")->name('registro.index');
 Route::post('registro/store',  "App\Http\Controllers\RegisterController@store")->name('registro.store');
 Route::get('/contact_accept/{code}', 'App\Http\Controllers\RegisterController@verifyEmail');
+
+Route::get('perfil', 'App\Http\Controllers\ProfileController@index')->name('perfil.index')->middleware('auth');
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\ReserveController::class, 'index'])->name('home');
