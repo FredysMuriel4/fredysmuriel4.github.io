@@ -32,7 +32,7 @@
       @endauth
       @guest
       <li class="nav-item">
-        <a class="nav-link" href="#" style="color:white;">Registrarse</a>
+        <a class="nav-link" href="{{route('registro.index')}}"" style="color:white;">Registrarse</a>
         {{-- {{route('register')}} --}}
       </li>
       @endguest

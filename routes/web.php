@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->name('login');
 
 // Route::resource('reserva', "App\Http\Controllers\ReserveController")->middleware('auth');
 Route::get('reserva', "App\Http\Controllers\ReserveController@index")->name('reserva.index')->middleware('auth');
@@ -24,6 +24,9 @@ Route::get('reserva/create', "App\Http\Controllers\ReserveController@create")->n
 Route::post('reserva/store', "App\Http\Controllers\ReserveController@store")->name('reserva.store')->middleware('auth');
 Route::get('/reserves/{id}', "App\Http\Controllers\ReserveController@getReserves")->middleware('auth');
 
+Route::get('registro', "App\Http\Controllers\RegisterController@index")->name('registro.index');
+Route::post('registro/store',  "App\Http\Controllers\RegisterController@store")->name('registro.store');
+Route::get('/contact_accept/{code}', 'App\Http\Controllers\RegisterController@verifyEmail');
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\ReserveController::class, 'index'])->name('home');

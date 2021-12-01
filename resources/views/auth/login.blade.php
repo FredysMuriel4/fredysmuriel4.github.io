@@ -10,7 +10,7 @@
                         <img src="{{asset('images/banner.png')}}" class="img-responsive" style="">
                     </div>
                 </div>
-
+                @include('layouts.alerts')
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -39,7 +39,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <small> Recuerda que las credenciales para loguearte son las institucionales. </small>
+                                <small> Recuerda registrarte oprimiendo en el botón que se encuentra en la parte superior derecha. </small>
                             </div>
                         </div>
                         <div class="col-md-12">
