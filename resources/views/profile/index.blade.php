@@ -10,6 +10,7 @@
                     <h4> Perfil del usuario </h4>
                     <small> Aquí encontrarás todas tu información personal.</small>
                 </div>
+                @include('layouts.alerts')
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3 border-right">
@@ -48,6 +49,26 @@
                                         <input type="text" class="form-control" value="{{Auth()->user()->email}}" placeholder="surname" readonly="">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="p-3 py-5">
+                                <form action="{{route('perfil.password')}}" method="post">
+                                    @csrf
+                                    <div class="row mt-2">
+                                        <div class="col-md-6"><label class="labels">Contraseña</label>
+                                            <input type="password" name="password" class="form-control" placeholder="**********">
+                                        </div>
+                                        <div class="col-md-6"><label class="labels">Verificar Contraseña</label>
+                                            <input type="password" name="verify_password" class="form-control" value="" placeholder="**********">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4">
+                                            <button class="btn btn-block" style="background-color: #033E82; color: white;"> Actualizar</button>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
