@@ -26,9 +26,16 @@
                                             <td>{{$reserve->getLesson->name}}</td>
                                             <td>{{date('j/M/Y', strtotime($reserve->start_date))}}</td>
                                             <td>{{date('j/M/Y', strtotime($reserve->end_date))}}</td>
-                                            <td>{{date('g:m A', strtotime($reserve->start_time))}}</td>
-                                            <td>{{date('g:m A', strtotime($reserve->end_time))}}</td>
-                                            <td></td>
+                                            <td>{{date('g:i A', strtotime($reserve->start_time))}}</td>
+                                            <td>{{date('g:i A', strtotime($reserve->end_time))}}</td>
+                                            <td>
+                                                {{-- Comparando las fechas --}}
+                                                @if ((strtotime(date('j/M/Y')) >= strtotime(date('j/M/Y', strtotime($reserve->start_date)))) && (strtotime(date('j/M/Y')) <= strtotime(date('j/M/Y', strtotime($reserve->end_date)))))
+                                                    @if ((strtotime(date('h:i:s')) >= strtotime(date('h:i:s', strtotime($reserve->start_time)))) && ((strtotime(date('h:i:s')) <= strtotime(date('h:i:s', strtotime($reserve->end_time))))))
+                                                        <a href="{{$reserve->getLesson->url}}" class="btn btn-primary" style="background-color: #033e82; color: white;" target="_blank"> Continuar </a>
+                                                    @endif
+                                                @endif
+                                            </td>
                                         </tr>
 									@endforeach
 								</tbody>
