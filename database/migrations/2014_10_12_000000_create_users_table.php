@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->text('code');
             $table->integer('code_confirmed')->default(0);
             $table->string('password');
+            $table->string('profile_picture')->nullable();
             // $table->rememberToken();
             $table->timestamps();
         });

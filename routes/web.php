@@ -29,6 +29,7 @@ Route::post('registro/store',  "App\Http\Controllers\RegisterController@store")-
 Route::get('/contact_accept/{code}', 'App\Http\Controllers\RegisterController@verifyEmail');
 
 Route::get('perfil', 'App\Http\Controllers\ProfileController@index')->name('perfil.index')->middleware('auth');
+Route::post('perfil/foto', 'App\Http\Controllers\ProfileController@updatePic')->name('perfil.photo')->middleware('auth');
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\ReserveController::class, 'index'])->name('home');
