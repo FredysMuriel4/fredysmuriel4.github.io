@@ -23,4 +23,9 @@ class Reserve extends Model
     {
         return $this->belongsTo(Lesson::class, 'lesson_id');
     }
+
+    public function getUser()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

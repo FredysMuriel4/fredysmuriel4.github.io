@@ -31,6 +31,11 @@ Route::get('/contact_accept/{code}', 'App\Http\Controllers\RegisterController@ve
 Route::get('perfil', 'App\Http\Controllers\ProfileController@index')->name('perfil.index')->middleware('auth');
 Route::post('perfil/foto', 'App\Http\Controllers\ProfileController@updatePic')->name('perfil.photo')->middleware('auth');
 Route::post('perfil/password', 'App\Http\Controllers\ProfileController@updatePassword')->name('perfil.password')->middleware('auth');
+
+//Lab routes
+Route::get('actividad', 'App\Http\Controllers\ActivityController@index')->name('activity.index')->middleware('auth');
+Route::get('/credenciales/{id}', 'App\Http\Controllers\ActivityController@sendCredentials')->name('credentials')->middleware('auth');
+
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\ReserveController::class, 'index'])->name('home');

@@ -17,7 +17,8 @@ class CreateLessonsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('url');
+            $table->string('user');
+            $table->string('password');
             $table->timestamps();
         });
     }

@@ -32,7 +32,7 @@
                                                 {{-- Comparando las fechas --}}
                                                 @if ((strtotime(date('j/M/Y')) >= strtotime(date('j/M/Y', strtotime($reserve->start_date)))) && (strtotime(date('j/M/Y')) <= strtotime(date('j/M/Y', strtotime($reserve->end_date)))))
                                                     @if ((strtotime(date('h:i:s')) >= strtotime(date('h:i:s', strtotime($reserve->start_time)))) && ((strtotime(date('h:i:s')) <= strtotime(date('h:i:s', strtotime($reserve->end_time))))))
-                                                        <a href="{{$reserve->getLesson->url}}" class="btn btn-primary" style="background-color: #033e82; color: white;" target="_blank"> Continuar </a>
+                                                        <a onclick="sendCredentials({{$reserve->id}})" class="btn btn-primary" style="background-color: #033e82; color: white;"> Continuar </a>
                                                     @endif
                                                 @endif
                                             </td>
@@ -56,4 +56,30 @@
 	</div>
 </button>
 @endsection
+@push('scripts')
+    <script>
+        async function sendCredentials(id) {
+            let response = await requestSendCredentials(id);
+            if(response.state == 200){
+                alert(response.message);
+                window.location.href = '/actividad';
+            } else {
+                alert(response.message);
+                console.log(response.error);
+            }
+        }
+        async function requestSendCredentials(id){
+            let response = {
+                'state': 500
+            };
+            await fetch("/credenciales/"+id)
+                .then(response => response.json())
+                .then(data => {
+                    response = data
+                })
+                .catch(e => console.log(e));
+            return response;
+        }
+    </script>
+@endpush
 
