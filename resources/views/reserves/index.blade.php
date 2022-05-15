@@ -31,7 +31,7 @@
                                             <td>
                                                 {{-- Comparando las fechas --}}
                                                 @if ((strtotime(date('j/M/Y')) >= strtotime(date('j/M/Y', strtotime($reserve->start_date)))) && (strtotime(date('j/M/Y')) <= strtotime(date('j/M/Y', strtotime($reserve->end_date)))))
-                                                    @if ((strtotime(date('h:i:s')) >= strtotime(date('h:i:s', strtotime($reserve->start_time)))) && ((strtotime(date('h:i:s')) <= strtotime(date('h:i:s', strtotime($reserve->end_time))))))
+                                                    @if ((strtotime(date('H:i:s')) >= strtotime(date('H:i:s', strtotime($reserve->start_time)))) && ((strtotime(date('H:i:s')) <= strtotime(date('H:i:s', strtotime($reserve->end_time))))))
                                                         <a onclick="sendCredentials({{$reserve->id}})" class="btn btn-primary" style="background-color: #033e82; color: white;"> Continuar </a>
                                                     @endif
                                                 @endif
@@ -62,7 +62,7 @@
             let response = await requestSendCredentials(id);
             if(response.state == 200){
                 alert(response.message);
-                window.location.href = '/actividad';
+                window.location.href = `/actividad/${id}`;
             } else {
                 alert(response.message);
                 console.log(response.error);

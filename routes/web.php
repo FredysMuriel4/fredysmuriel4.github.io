@@ -33,7 +33,7 @@ Route::post('perfil/foto', 'App\Http\Controllers\ProfileController@updatePic')->
 Route::post('perfil/password', 'App\Http\Controllers\ProfileController@updatePassword')->name('perfil.password')->middleware('auth');
 
 //Lab routes
-Route::get('actividad', 'App\Http\Controllers\ActivityController@index')->name('activity.index')->middleware('auth');
+Route::get('actividad/{id}', 'App\Http\Controllers\ActivityController@index')->name('activity.index')->middleware('auth');
 Route::get('/credenciales/{id}', 'App\Http\Controllers\ActivityController@sendCredentials')->name('credentials')->middleware('auth');
 
 Auth::routes(['register' => false]);

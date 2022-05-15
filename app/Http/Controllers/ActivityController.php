@@ -6,6 +6,7 @@ use App\Mail\SendLessonCredentials;
 use App\Models\Reserve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use DateTime;
 
 class ActivityController extends Controller
 {
@@ -14,9 +15,25 @@ class ActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return view('activity.index');
+        $reserve = Reserve::find($id);
+        $difference = $this->calcDiference($reserve->start_time, $reserve->end_time);
+
+        return view('activity.index', compact('difference'));
+    }
+
+    public function calcDiference($start_time, $end_time)
+    {
+        $start_hour = explode(':', $start_time)[0];
+        $end_hour = explode(':', $end_time)[0];
+        $hour = abs($start_hour - $end_hour);
+
+        $start_minutes = explode(':', $start_time)[1];
+        $end_minutes = explode(':', $end_time)[1];
+
+        $minutes = abs($start_minutes - $end_minutes);
+        return $hour.":".$minutes.":".'00';
     }
 
     public function sendCredentials($id)
