@@ -11,11 +11,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for=""><b> Hora Inicio *</b> </label> <br>
-                            <input type="time" class="form-control" name="start_time">
+                            <input type="time" class="form-control" name="start_time" id="start_time" onchange="calcDifferenceTime()">
                         </div>
                         <div class="col-md-6">
                             <label for=""><b> Hora Fin *</b> </label> <br>
-                            <input type="time" class="form-control" name="end_time">
+                            <input type="time" class="form-control" name="end_time" id="end_time" onchange="calcDifferenceTime()">
                         </div>
                     </div>
                     <div class="row mt-2">
@@ -37,3 +37,41 @@
         </div>
     </div>
 </div>
+
+<script>
+    function calcDifferenceTime() {
+        let start_time = document.getElementById("start_time").value;
+        let end_time = document.getElementById("end_time").value;
+
+        // Expresión regular para comprobar formato
+        let formatohora = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+
+        // Si algún valor no tiene formato correcto sale
+        if (!(start_time.match(formatohora)
+            && end_time.match(formatohora))){
+            return;
+        }
+
+        // Calcula los mins de cada hora
+        let start_mins = start_time.split(':')
+            .reduce((p, c) => parseInt(p) * 60 + parseInt(c));
+        let end_mins = end_time.split(':')
+            .reduce((p, c) => parseInt(p) * 60 + parseInt(c));
+
+        // Si la hora final es anterior a la hora inicial sale
+        if (end_mins < start_mins) return;
+
+        // Diferencia de mins
+        let diferencia = end_mins - start_mins;
+
+        // Cálculo de hours y mins de la diferencia
+        let hours = Math.floor(diferencia / 60);
+        let mins = diferencia % 60;
+
+        if(hours > 2 || (hours == 2 && mins > 00)){
+            document.getElementById("start_time").value = "";
+            document.getElementById("end_time").value = "";
+            alert('Error. No se pueden solicitar más de dos horas de reserva');
+        }
+    }
+</script>

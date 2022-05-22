@@ -41,22 +41,11 @@ class ReserveController extends Controller
 
             $reserve->save();
 
-            // $end_reserve_hour = strtotime ( '+'.$request->quantity.' hour' , strtotime ($request->time) ) ;
-            // $end_reserve_hour = date('H:i:s', $end_reserve_hour);
-
-            // $reserve = [
-            //     'user_id' => Auth()->user()->id,
-            //     'lesson_id' => $request->lesson_id,
-            //     'reserve_date' => $request->date." ".$request->time,
-            //     'quantity' => $request->quantity,
-            //     'end_reserve_hour' => $end_reserve_hour
-            // ];
-
             session()->flash('success', 'Actividad reservada exitosamente.');
             return redirect()->route('reserva.index');
 
         } catch (\Exception $e) {
-            session()->flash('danger', $e);
+            session()->flash('danger', $e->getMessage());
             return redirect()->back()->withInput();
         }
     }
