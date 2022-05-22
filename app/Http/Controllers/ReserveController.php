@@ -30,6 +30,12 @@ class ReserveController extends Controller
                 'end_time' => 'required',
             ]);
 
+            $validate_times = $this->validateReserveTimes($request->start_time, $request->end_time, $request->start_date, $request->lesson_id);
+            if(!$validate_times){
+                session()->flash('danger', 'Error. La actividad ya se encuentra registrada en este lapsus de tiempo.');
+                return redirect()->back()->withInput();
+            }
+
             $reserve = new Reserve();
             $reserve->user_id = Auth()->user()->id;
             $reserve->lesson_id = $request->lesson_id;
@@ -59,5 +65,21 @@ class ReserveController extends Controller
     public function getReserves($id)
     {
         return Reserve::where('lesson_id', $id)->with('getLesson')->get();
+    }
+
+    public function validateReserveTimes($start_time, $end_time, $date, $lesson_id)
+    {
+        $reserves_by_lesson = $this->getReserves($lesson_id);
+        $reserves_by_day = $reserves_by_lesson->where('start_date', $date);
+
+        foreach ($reserves_by_day as $key) {
+            if((strtotime($start_time) > strtotime($key->start_time)) && (strtotime($start_time) < strtotime($key->end_time))){
+                return false;
+            }
+            if((strtotime($end_time) > strtotime($key->start_time)) && (strtotime($end_time) < strtotime($key->end_time))){
+                return false;
+            }
+        }
+        return true;
     }
 }
