@@ -18,22 +18,31 @@ class ActivityController extends Controller
     public function index($id)
     {
         $reserve = Reserve::find($id);
-        $difference = $this->calcDiference($reserve->start_time, $reserve->end_time);
+        $difference = $this->calcDiference(date('H:i:s'), $reserve->end_time);
 
         return view('activity.index', compact('difference'));
     }
 
     public function calcDiference($start_time, $end_time)
     {
-        $start_hour = explode(':', $start_time)[0];
+        /* $start_hour = explode(':', $start_time)[0];
         $end_hour = explode(':', $end_time)[0];
+
         $hour = abs($start_hour - $end_hour);
 
         $start_minutes = explode(':', $start_time)[1];
         $end_minutes = explode(':', $end_time)[1];
 
         $minutes = abs($start_minutes - $end_minutes);
-        return $hour.":".$minutes.":".'00';
+
+        return ($hour < 10 ? '0'.$hour : $hour) . ":" . ($minutes < 10 ? '0'.$minutes : $minutes) . ":" . '00'; */
+
+        $apertura = new DateTime($start_time);
+        $cierre = new DateTime($end_time);
+
+        $tiempo = $apertura->diff($cierre);
+
+        return $tiempo->format('%H:%I:%s');
     }
 
     public function sendCredentials($id)

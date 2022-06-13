@@ -59,7 +59,12 @@
             .reduce((p, c) => parseInt(p) * 60 + parseInt(c));
 
         // Si la hora final es anterior a la hora inicial sale
-        if (end_mins < start_mins) return;
+        if (end_mins < start_mins) {
+            document.getElementById("start_time").value = "";
+            document.getElementById("end_time").value = "";
+            alert('Error. La hora de inicio debe ser menor que la final.')
+            return
+        };
 
         // Diferencia de mins
         let diferencia = end_mins - start_mins;
@@ -68,10 +73,12 @@
         let hours = Math.floor(diferencia / 60);
         let mins = diferencia % 60;
 
+
         if(hours > 2 || (hours == 2 && mins > 00)){
             document.getElementById("start_time").value = "";
             document.getElementById("end_time").value = "";
             alert('Error. No se pueden solicitar más de dos horas de reserva');
+            return;
         }
     }
 </script>
