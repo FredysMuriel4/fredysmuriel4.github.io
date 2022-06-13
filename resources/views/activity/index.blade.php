@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-12 pl-4 pb-4 pr-4">
                 <div class="embed-responsive embed-responsive-21by9">
-                    <iframe class="embed-responsive-item" src="https://getbootstrap.com/"></iframe>
+                    <iframe class="embed-responsive-item" src="https://getbootstrap.com/" sandbox="allow-forms allow-scripts"></iframe>
                 </div>
             </div>
         </div>
@@ -47,6 +47,24 @@
             }
         } else {
             seconds -= 1;
+        }
+
+        if(hours < 10){
+            if(hours.toString().length < 2){
+                hours = "0"+hours;
+            }
+        }
+
+        if(minutes < 10){
+            if(minutes.toString().length < 2){
+                minutes = "0"+minutes;
+            }
+        }
+
+        if(seconds < 10){
+            if(seconds.toString().length < 2){
+                seconds = "0"+seconds;
+            }
         }
 
         document.getElementById('counter').innerHTML = hours+":"+minutes+":"+seconds;
