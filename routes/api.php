@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::post('login', 'App\Http\Controllers\API\UserController@login');
+
+Route::group(['middleware' => ['auth:sanctum']], function() {
+    Route::get('index', 'App\Http\Controllers\API\ReserveController@index');
+    Route::post('new-reserve', 'App\Http\Controllers\API\ReserveController@store');
+    Route::get('profile', 'App\Http\Controllers\API\UserController@profile');
+    Route::post('log-out', 'App\Http\Controllers\API\UserController@logOut');
 });
