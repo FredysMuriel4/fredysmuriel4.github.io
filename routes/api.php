@@ -21,8 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'App\Http\Controllers\API\UserController@login');
 
 Route::group(['middleware' => ['auth:sanctum']], function() {
+
     Route::get('index', 'App\Http\Controllers\API\ReserveController@index');
+    Route::get('lessons', 'App\Http\Controllers\API\ReserveController@getLessons');
     Route::post('new-reserve', 'App\Http\Controllers\API\ReserveController@store');
+
     Route::get('profile', 'App\Http\Controllers\API\UserController@profile');
     Route::post('log-out', 'App\Http\Controllers\API\UserController@logOut');
 });
