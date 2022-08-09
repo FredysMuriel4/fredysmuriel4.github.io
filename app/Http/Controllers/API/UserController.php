@@ -73,7 +73,6 @@ class UserController extends Controller
             return response()->json([
                 'status' => 200,
                 'data' => $user,
-                'error' => '',
                 'message' => 'Información del usuario.'
             ]);
         } catch (Exception $e) {
@@ -94,7 +93,6 @@ class UserController extends Controller
             return response()->json([
                 'status' => 200,
                 'data' => null,
-                'error' => '',
                 'message' => 'Ha finalizado su sesión.'
             ]);
         } catch (Exception $e) {
