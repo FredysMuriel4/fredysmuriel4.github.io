@@ -58,8 +58,7 @@ class UserController extends Controller
 
         } catch (Exception $e) {
             return response()->json([
-                'code' => 500,
-                'status' => 'error',
+                'status' => 500,
                 'message' => $e->getMessage(),
                 'data' => null
             ]);
@@ -79,8 +78,7 @@ class UserController extends Controller
             ]);
         } catch (Exception $e) {
             return response()->json([
-                'code' => 500,
-                'status' => 'error',
+                'status' => 500,
                 'message' => $e->getMessage(),
                 'data' => null
             ]);
@@ -101,8 +99,7 @@ class UserController extends Controller
             ]);
         } catch (Exception $e) {
             return response()->json([
-                'code' => 500,
-                'status' => 'error',
+                'status' => 500,
                 'message' => $e->getMessage(),
                 'data' => null
             ]);

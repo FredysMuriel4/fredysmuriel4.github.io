@@ -19,24 +19,37 @@ class ReserveController extends Controller
                 ->select('start_date', 'end_date', 'start_time', 'end_time', 'lesson_id', 'state')
                 ->get();
 
-            if(isset($reserves)) {
-                return response()->json([
-                    'status' => 200,
-                    'data' => $reserves,
-                    'message' => 'Reservas del usuario'
-                ]);
-            }
-
             return response()->json([
                 'status' => 200,
-                'data' => [],
-                'message' => 'Sin reservas'
+                'data' => $reserves,
+                'message' => 'Reservas del usuario'
             ]);
 
         } catch (Exception $e) {
             return response()->json([
-                'code' => 500,
-                'status' => 'error',
+                'status' => 500,
+                'message' => $e->getMessage(),
+                'data' => null
+            ]);
+        }
+    }
+
+    public function getLessons()
+    {
+        try {
+
+            $lessons = Lesson::get();
+
+            return response()->json([
+                'status' => 200,
+                'data' => $lessons,
+                'message' => 'Actividades creadas'
+            ]);
+
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 500,
                 'message' => $e->getMessage(),
                 'data' => null
             ]);
