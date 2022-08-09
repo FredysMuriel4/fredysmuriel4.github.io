@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Reserve;
+use App\Models\Lesson;
 use Auth;
 use Illuminate\Support\Facades\Validator;
 
