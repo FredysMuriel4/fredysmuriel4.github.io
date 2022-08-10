@@ -59,7 +59,6 @@ class ReserveController extends Controller
 
     public function store(Request $request)
     {
-        return $request;
         try {
 
             $Validator = Validator::make($request->all(), [
@@ -104,6 +103,7 @@ class ReserveController extends Controller
 
             $reserve->user_id = Auth()->user()->id;
             $reserve->lesson_id = $lesson_id;
+            return "Hasta aquí fino";
             $reserve->start_date = date('Y-m-d', strtotime($request->start_date));
             if(date('H:i:s', strtotime('+2 hour' ,strtotime(date('H:i:s', strtotime($request->start_time))))) < date('H:i:s', strtotime($request->start_time))) {
                 $reserve->end_date = date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d', strtotime($request->start_date)))));
