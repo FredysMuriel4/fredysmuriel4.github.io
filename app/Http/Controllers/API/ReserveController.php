@@ -79,15 +79,16 @@ class ReserveController extends Controller
 
             $lesson_id = Lesson::where('name', $request->lesson_id)->first();
 
-            $validate_times = $this->validateReserveTimes($request->start_time, $request->end_time, $request->start_date, $request->lesson_id);
-            if(!$validate_times){
-                return response()->json([
-                    'status' => 500,
-                    'data' => null,
-                    'error' => 'Error. La actividad ya se encuentra registrada en este lapsus de tiempo.',
-                    'message' => 'Error. La actividad ya se encuentra registrada en este lapsus de tiempo.'
-                ]);
-            }
+            return $lesson_id;
+            // $validate_times = $this->validateReserveTimes($request->start_time, $request->end_time, $request->start_date, $request->lesson_id);
+            // if(!$validate_times){
+            //     return response()->json([
+            //         'status' => 500,
+            //         'data' => null,
+            //         'error' => 'Error. La actividad ya se encuentra registrada en este lapsus de tiempo.',
+            //         'message' => 'Error. La actividad ya se encuentra registrada en este lapsus de tiempo.'
+            //     ]);
+            // }
 
 
             if(!isset($lesson_id)){
