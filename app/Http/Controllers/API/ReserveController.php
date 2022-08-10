@@ -77,6 +77,8 @@ class ReserveController extends Controller
                 ]);
             }
 
+            $lesson_id = Lesson::where('name', $request->lesson_id)->first();
+
             $validate_times = $this->validateReserveTimes($request->start_time, $request->end_time, $request->start_date, $request->lesson_id);
             if(!$validate_times){
                 return response()->json([
@@ -87,7 +89,6 @@ class ReserveController extends Controller
                 ]);
             }
 
-            $lesson_id = Lesson::where('name', $request->lesson_id)->first();
 
             if(!isset($lesson_id)){
                 return response()->json([
