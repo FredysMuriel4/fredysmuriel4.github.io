@@ -87,12 +87,21 @@ class ReserveController extends Controller
                 ]);
             }
 
-            // return ;
+            $lesson_id = Lesson::where('name', $request->lesson_id)->first();
+
+            if(!isset($lesson_id)){
+                return response()->json([
+                    'status' => 500,
+                    'data' => null,
+                    'error' => 'error',
+                    'message' => "No se encontró la actividad",
+                ]);
+            }
 
             $reserve = new Reserve();
 
             $reserve->user_id = Auth()->user()->id;
-            $reserve->lesson_id = $request->lesson_id;
+            $reserve->lesson_id = $lesson_id;
             $reserve->start_date = date('Y-m-d', strtotime($request->start_date));
             if(date('H:i:s', strtotime('+2 hour' ,strtotime(date('H:i:s', strtotime($request->start_time))))) < date('H:i:s', strtotime($request->start_time))) {
                 $reserve->end_date = date('Y-m-d', strtotime('+1 day', strtotime(date('Y-m-d', strtotime($request->start_date)))));
