@@ -87,7 +87,7 @@ class ReserveController extends Controller
                 ]);
             }
 
-            $lesson_id = Lesson::where('name', $request->lesson_id)->first();
+            $lesson_id = Lesson::where('name', 'like', '%'.$request->lesson_id.'%')->first();
 
             if(!isset($lesson_id)){
                 return response()->json([
