@@ -89,7 +89,7 @@ class ReserveController extends Controller
                 ]);
             }
 
-            if(!isset($lesson_id)){
+            if(!isset($lesson)){
                 return response()->json([
                     'status' => 500,
                     'data' => null,
