@@ -77,19 +77,17 @@ class ReserveController extends Controller
                 ]);
             }
 
-            $lesson_id = Lesson::where('name', $request->lesson_id)->first();
+            $lesson = Lesson::where('name', $request->lesson_id)->first();
 
-            return $lesson_id;
-            // $validate_times = $this->validateReserveTimes($request->start_time, $request->end_time, $request->start_date, $request->lesson_id);
-            // if(!$validate_times){
-            //     return response()->json([
-            //         'status' => 500,
-            //         'data' => null,
-            //         'error' => 'Error. La actividad ya se encuentra registrada en este lapsus de tiempo.',
-            //         'message' => 'Error. La actividad ya se encuentra registrada en este lapsus de tiempo.'
-            //     ]);
-            // }
-
+            $validate_times = $this->validateReserveTimes($request->start_time, $request->end_time, $request->start_date, $lesson->id);
+            if(!$validate_times){
+                return response()->json([
+                    'status' => 500,
+                    'data' => null,
+                    'error' => 'Error. La actividad ya se encuentra registrada en este lapsus de tiempo.',
+                    'message' => 'Error. La actividad ya se encuentra registrada en este lapsus de tiempo.'
+                ]);
+            }
 
             if(!isset($lesson_id)){
                 return response()->json([
@@ -103,7 +101,7 @@ class ReserveController extends Controller
             $reserve = new Reserve();
 
             $reserve->user_id = Auth()->user()->id;
-            $reserve->lesson_id = $lesson_id;
+            $reserve->lesson_id = $lesson->id;
             return "Hasta aquí fino";
             $reserve->start_date = date('Y-m-d', strtotime($request->start_date));
             if(date('H:i:s', strtotime('+2 hour' ,strtotime(date('H:i:s', strtotime($request->start_time))))) < date('H:i:s', strtotime($request->start_time))) {
