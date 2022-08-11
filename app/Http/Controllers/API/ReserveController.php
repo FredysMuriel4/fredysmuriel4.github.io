@@ -172,8 +172,12 @@ class ReserveController extends Controller
             ]);
         }
 
-        $start_time = date('H:i:s', strtotime($request->start_time));
-        if(strtotime('+2 hours', strtotime($start_time)) > strtotime(date('H:i:s', strtotime($request->end_time)))){
+        $start_time = date_create(date('H:i:s', strtotime($request->start_time)));
+        $end_time = date_create(date('H:i:s', strtotime($request->end_time)));
+
+        $difference =  date_diff($start_time, $end_time);
+
+        if($difference->h > 2){
             return response()->json([
                 'status' => 500,
                 'data' => null,
