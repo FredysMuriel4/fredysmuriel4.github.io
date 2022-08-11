@@ -81,7 +81,7 @@ class ReserveController extends Controller
 
             return $time_validator;
 
-            if($time_validator != true){
+            if($time_validator['status'] != 200){
                 return $time_validator;
             }
 
@@ -182,6 +182,11 @@ class ReserveController extends Controller
             ]);
         }
 
-        return true;
+        return return response()->json([
+            'status' => 200,
+            'data' => null,
+            'error' => '',
+            'message' => 'Horas correctas'
+        ]);
     }
 }
