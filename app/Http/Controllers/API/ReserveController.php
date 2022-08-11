@@ -79,6 +79,8 @@ class ReserveController extends Controller
 
             $time_validator = $this->validateHours($request);
 
+            return $time_validator;
+
             if($time_validator != true){
                 return $time_validator;
             }
