@@ -77,6 +77,12 @@ class ReserveController extends Controller
                 ]);
             }
 
+            $time_validator = $this->validateHours($request);
+
+            if($time_validator != true){
+                return $time_validator;
+            }
+
             $lesson = Lesson::where('name', $request->lesson_id)->first();
 
             $validate_times = $this->validateReserveTimes($request->start_time, $request->end_time, $request->start_date, $lesson->id);
@@ -150,6 +156,30 @@ class ReserveController extends Controller
                 return false;
             }
         }
+        return true;
+    }
+
+    public function validateHours($request)
+    {
+        if(strtotime(date('H:i:s', strtotime($request->start_time))) > strtotime(date('H:i:s', strtotime($request->end_time)))){
+            return response()->json([
+                'status' => 500,
+                'data' => null,
+                'error' => 'Error',
+                'message' => 'Error. La hora de inicio no puede ser menor a la hora final'
+            ]);
+        }
+
+        $start_time = date('H:i:s', strtotime($request->start_time));
+        if(strtotime('+2 hours', strtotime($start_time)) > strtotime(date('H:i:s', strtotime($request->end_time)))){
+            return response()->json([
+                'status' => 500,
+                'data' => null,
+                'error' => 'Error',
+                'message' => 'Error. No puede obtener más de dos horas de reserva'
+            ]);
+        }
+
         return true;
     }
 }
