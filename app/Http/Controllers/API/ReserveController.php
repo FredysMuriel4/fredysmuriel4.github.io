@@ -182,7 +182,7 @@ class ReserveController extends Controller
             ]);
         }
 
-        return return response()->json([
+        return response()->json([
             'status' => 200,
             'data' => null,
             'error' => '',
