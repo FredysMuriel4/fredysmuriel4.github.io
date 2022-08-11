@@ -162,12 +162,12 @@ class ReserveController extends Controller
     public function validateHours($request)
     {
         if(strtotime(date('H:i:s', strtotime($request->start_time))) > strtotime(date('H:i:s', strtotime($request->end_time)))){
-            return response()->json([
+            return [
                 'status' => 500,
                 'data' => null,
                 'error' => 'Error',
                 'message' => 'Error. La hora de inicio no puede ser menor a la hora final'
-            ]);
+            ];
         }
 
         $start_time = date_create(date('H:i:s', strtotime($request->start_time)));
@@ -176,19 +176,19 @@ class ReserveController extends Controller
         $difference =  date_diff($start_time, $end_time);
 
         if($difference->h > 2){
-            return response()->json([
+            return [
                 'status' => 500,
                 'data' => null,
                 'error' => 'Error',
                 'message' => 'Error. No puede obtener más de dos horas de reserva'
-            ]);
+            ];
         }
 
-        return response()->json([
+        return [
             'status' => 200,
             'data' => null,
             'error' => '',
             'message' => 'Horas correctas'
-        ]);
+        ];
     }
 }
