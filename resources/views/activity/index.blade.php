@@ -28,6 +28,8 @@
 
         if(hours == 00 && minutes == 00 && seconds == 00){
             alert('Su sesión ha finalizado');
+            console.log(window.location.pathname);
+            window.location.href = "http://www.w3schools.com";
         }
 
         if(seconds == 00){
