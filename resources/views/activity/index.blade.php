@@ -28,8 +28,8 @@
 
         if(hours == 00 && minutes == 00 && seconds == 00){
             alert('Su sesión ha finalizado');
-            console.log(window.location);
-            // window.location.href = "http://www.w3schools.com";
+            let url = window.location.origin;
+            window.location.href = url+"/reserva";
         }
 
         if(seconds == 00){
