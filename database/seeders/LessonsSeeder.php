@@ -16,42 +16,34 @@ class LessonsSeeder extends Seeder
     {
         DB::table('lessons')->delete();
         DB::table('lessons')->insert([
-            'name' => 'Virtual trunking Protocol',
+            'name' => 'Lab - Static VLANS, Trunking, and VTP',
             'description' => 'Descripción laboratorio 1',
-            'user' => 'Usuario1',
-            'password' => 'PasswordU1',
+            'user' => 'grupo1',
+            'password' => 'grupo1',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('lessons')->insert([
-            'name' => 'Switch port Analyzer/ Remote Switch Port Analyzer',
+            'name' => 'Lab - Basic RIPng and Default Gateway',
             'description' => 'Descripción laboratorio 2',
-            'user' => 'Usuario2',
-            'password' => 'PasswordU2',
+            'user' => 'grupo2',
+            'password' => 'grupo2',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('lessons')->insert([
-            'name' => 'First Hop Redundancy Protocols',
+            'name' => 'Lab - Securing the Router for Administrative Access',
             'description' => 'Descripción laboratorio 3',
-            'user' => 'Usuario3',
-            'password' => 'PasswordU3',
+            'user' => 'grupo3',
+            'password' => 'grupo3',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('lessons')->insert([
-            'name' => 'Dynamic Multipoint Virtual Private Network',
+            'name' => 'Lab - Securing Administrative Access Using AAA and RADIUS',
             'description' => 'Descripción laboratorio 4',
-            'user' => 'Usuario4',
-            'password' => 'PasswordU4',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('lessons')->insert([
-            'name' => 'Routing Redistribution',
-            'description' => 'Descripción laboratorio 5',
-            'user' => 'Usuario5',
-            'password' => 'PasswordU5',
+            'user' => 'grupo4',
+            'password' => 'grupo4',
             'created_at' => now(),
             'updated_at' => now()
         ]);
