@@ -2,10 +2,20 @@
 @section('content')
     <div class="content">
         <div class="row">
-            <div class="col-md-12 pt-4 pl-4 pr-4 d-flex justify-content-center align-items-center">
+            <div class="col-md-12 pt-2 pl-4 pr-4 d-flex justify-content-center align-items-center">
+                <b> TIEMPO RESTANTE </b> <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 pt-1 pl-4 pr-4 d-flex justify-content-center align-items-center">
                 <div id="counter_box">
                     <h2><b id="counter" class="text-danger"> {{$difference}} </b></h2>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 pl-4 pr-4 d-flex justify-content-end align-items-center">
+                Si el contenido de la actividad no carga, por favor &nbsp; <a href="http://190.248.83.150/#/login" target="_blank"> Click aquí! </a>
             </div>
         </div>
         <div class="row">
@@ -37,15 +47,15 @@
                 if(hours > 0){
                     hours -= 1;
                     minutes = 59;
-                    seconds = 60;
+                    seconds = 59;
                 } else {
                     hours = 0;
                     minutes = 0;
-                    seconds = 60;
+                    seconds = 59;
                 }
             } else {
                 minutes -= 1;
-                seconds = 60;
+                seconds = 59;
             }
         } else {
             seconds -= 1;
