@@ -30,7 +30,7 @@
                                             <td>{{date('g:i A', strtotime($reserve->end_time))}}</td>
                                             <td>
                                                 {{-- Comparando las fechas --}}
-                                                @if ((strtotime(date('j/M/Y')) >= strtotime(date('j/M/Y', strtotime($reserve->start_date)))) && (strtotime(date('j/M/Y')) <= strtotime(date('j/M/Y', strtotime($reserve->end_date)))))
+                                                @if ((strtotime(date('j/M/Y')) == strtotime(date('j/M/Y', strtotime($reserve->start_date)))) && (strtotime(date('j/M/Y')) == strtotime(date('j/M/Y', strtotime($reserve->end_date)))))
                                                     @if ((strtotime(date('H:i:s')) >= strtotime(date('H:i:s', strtotime($reserve->start_time)))) && ((strtotime(date('H:i:s')) <= strtotime(date('H:i:s', strtotime($reserve->end_time))))))
                                                         <a onclick="sendCredentials({{$reserve->id}})" class="btn btn-primary" style="background-color: #033e82; color: white;"> Continuar </a>
                                                     @endif
