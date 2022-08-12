@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="col-md-12 text-center">
-                        <img src="{{asset('images/banner.png')}}" class="img-responsive" style="">
+                        <img src="{{asset('images/Banner.png')}}" class="img-responsive" style="">
                     </div>
                 </div>
                 @include('layouts.alerts')
