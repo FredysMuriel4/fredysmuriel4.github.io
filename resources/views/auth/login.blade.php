@@ -3,8 +3,28 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-md-5 login-card">
+            <div class="login-header">
+                <img src="{{asset('images/Banner.png')}}" class="img-responsive" style="width: 50%;">
+                @include('layouts.alerts')
+            </div>
+            <hr>
+            <div class="login-header d-flex flex-column mt-4">
+                <div>
+                    <label> ¡Identificate con tu correo institucional para iniciar sesión en el sistema! </label>
+                </div>
+                <div class="mt-3">
+                    <a
+                        class="btn btn-sm btn-login"
+                        href="{{ route('microsoft.oAuth') }}"
+                    >
+                        <img src="{{ asset('images/office.png') }}" style="width: 4%">
+                            Iniciar Sesión con Microsoft
+                    </a>
+                </div>
+            </div>
+            <hr>
+            {{-- <div class="card">
                 <div class="card-header">
                     <div class="col-md-12 text-center">
                         <img src="{{asset('images/Banner.png')}}" class="img-responsive" style="">
@@ -47,7 +67,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

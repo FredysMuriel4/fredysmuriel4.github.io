@@ -39,3 +39,7 @@ Route::get('/credenciales/{id}', 'App\Http\Controllers\ActivityController@sendCr
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\ReserveController::class, 'index'])->name('home');
+
+// MICROSOFT LOGIN
+Route::get('microsoft-oAuth','App\Http\Controllers\MicrosoftAuthController@microsoftOAuth')->name('microsoft.oAuth');
+Route::get('callback','App\Http\Controllers\MicrosoftAuthController@microsoftOAuthCallback')->name('microsoft.oAuth.callback');
