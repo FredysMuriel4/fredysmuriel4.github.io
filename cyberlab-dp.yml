@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cyberlab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cyberlab
+  template:
+    metadata:
+      labels:
+        app: cyberlab
+    spec:
+      containers:
+        - name: laravel
+          image: fredysmuriel4/cyberlab:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_HOST
+              value: mysql
+            - name: DB_DATABASE
+              value: labs_virtualization
+            - name: DB_USERNAME
+              value: root
+            - name: DB_PASSWORD
+              value: root
